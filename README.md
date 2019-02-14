@@ -22,7 +22,6 @@ Google Dataset Search: https://toolbox.google.com/datasetsearch
 * Electricity Map real-time visualisation of the CO2 emissions of electricity consumption: https://github.com/tmrowco/electricitymap-contrib#data-sources
 
 ## 3rd party commercial Open APIs
-
 * Tibber: https://api.tibber.com/
 * Oss: https://oss.no/nerdemodus
 * Mill Heat: https://api.millheat.com/
@@ -31,7 +30,7 @@ Google Dataset Search: https://toolbox.google.com/datasetsearch
 * Netatmo weather station: https://dev.netatmo.com/en-US/dev
 * BMW Labs IFTTT: https://ifttt.com/bmwlabs
 * Tesla unofficial APIs: https://www.teslaapi.io/ and https://tesla-api.timdorr.com/
-
+* Boligmappa: https://boligmappa.atlassian.net/wiki/spaces/API/pages/26312714/Introduction
 
 ## Developer APIs
 
