@@ -41,3 +41,7 @@ Google Dataset Search: https://toolbox.google.com/datasetsearch
 ## Documents and Signing
 
 - Digipost signing: https://github.com/digipost/signature-api-specification
+
+## License
+
+This project is [MIT licensed](./LICENSE).
