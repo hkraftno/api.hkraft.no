@@ -21,6 +21,7 @@ Google Dataset Search: https://toolbox.google.com/datasetsearch
 - Fiskeridirektoratet: https://www.fiskeridir.no/Statistikk/AApne-data
 - Universitetet i Oslo: https://api.uio.no/#!/
 - Electricity Map real-time visualisation of the CO2 emissions of electricity consumption: https://github.com/tmrowco/electricitymap-contrib#data-sources
+- Hjertestartere: https://www.113.no
 
 ## 3rd party commercial Open APIs
 

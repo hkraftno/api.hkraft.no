@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<!-- saved from url=(0149)file:///Users/karlgustav/Library/Group%20Containers/2E337YPCZY.airmail/Library/Application%20Support/it.bloop.airmail2/Airmail/General/Tmp/api_1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="file:///favicon.ico">
+
+    <title>Hjertestarterregister - API Reference</title>
+
+    <link href="file:///Users/karlgustav/Library/Group%20Containers/2E337YPCZY.airmail/Library/Application%20Support/it.bloop.airmail2/Airmail/General/Tmp/css/bootstrap.min.css" rel="stylesheet">
+    <link href="file:///Users/karlgustav/Library/Group%20Containers/2E337YPCZY.airmail/Library/Application%20Support/it.bloop.airmail2/Airmail/General/Tmp/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <style>
+      html, body { height: 100%; }
+      #wrap { min-height: 100%; height: auto; margin: 0 auto -60px; padding: 0 0 60px; }
+      #support-footer { height: 80px; background-color: #f5f5f5; }
+      /*
+      #wrap > .container { padding: 60px 15px 0; }
+      */
+      .container .text-muted { margin: 20px 0; }
+      #support-footer > .container { padding-left: 15px; padding-right: 15px; }
+      h3 { color: #aaa; }
+      h3.call { margin-top: 50px; }
+
+      li.L0,
+      li.L1,
+      li.L2,
+      li.L3,
+      li.L5,
+      li.L6,
+      li.L7,
+      li.L8 { list-style-type: decimal !important }
+
+      .request {
+        font-size:20px;
+        padding: 10px;
+      }
+
+      
+    </style>
+
+  </head>
+
+  <body>
+
+<!-- Wrap all page content here -->
+    <div id="wrap">
+
+
+      <!-- Begin page content -->
+
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+
+<h1>Hjertestarterregister API Reference</h1>
+
+<p>This document contains information about the application programming interfaces (APIs) offered by Hjertestarterregister to developers.</p>
+
+  <ul>
+    <li><a href="file:///Users/karlgustav/Library/Group%20Containers/2E337YPCZY.airmail/Library/Application%20Support/it.bloop.airmail2/Airmail/General/Tmp/api_1.html#asset_search">Asset Search</a></li>
+    <li><a href="file:///Users/karlgustav/Library/Group%20Containers/2E337YPCZY.airmail/Library/Application%20Support/it.bloop.airmail2/Airmail/General/Tmp/api_1.html#my_assets">My Assets</a></li>
+    <li><a href="file:///Users/karlgustav/Library/Group%20Containers/2E337YPCZY.airmail/Library/Application%20Support/it.bloop.airmail2/Airmail/General/Tmp/api_1.html#asset_messages">Messages</a></li>
+  </ul>
+
+<h3>General</h3>
+
+<p>The API uses a REST-style interface over HTTP(S). The API endpoint is <code>https://www.113.no/ords/api/v1/</code> and all paths below are relative to that. Different endpoints may exist for test environments.</p>
+
+<p>All requests must be made over HTTPS (HTTP requests will return an error). Note that test environments may be configured to accept insecure (HTTP) requests to facilitate testing and troubleshooting.</p>
+
+<p>Developers may use command-line tools such as <code>curl</code> or browser plugins such as <code>RESTClient</code> for Firefox to test the API.</p>
+
+<h3>Authentication</h3>
+
+<p>The API uses OAuth for authentication. To use the API you need a valid Client ID and Client Secret. Please contact the system administrator to obtain valid credentials. If a Client ID or Client Secret has been compromised, new keys can be issued by the system administrator.</p>
+
+<p>The OAuth endpoint to obtain access tokens is <code>https://www.113.no/ords/api/oauth/token</code>.</p>
+
+<p>A sample request to obtain an access token looks like this:</p>
+<pre class="prettyprint linenums">curl -i --user your_client_id:your_client_secret --data "grant_type=client_credentials" https://www.113.no/ords/api/oauth/token
+</pre>
+
+<p>If successful, the above call will return the following, where <code>your_token</code> is the access token to be used for further requests:</p>
+
+<pre class="prettyprint linenums">{"access_token":"your_token","token_type":"bearer","expires_in":3600}
+</pre>
+
+<h3>Request Format</h3>
+
+<p>The API receives HTTP requests using different verbs (<code>GET</code>, <code>PUT</code>, <code>POST</code> and <code>DELETE</code>). Parameters may be passed as part of the URL in <code>GET</code> requests. For other requests, parameters should be passed as JSON in the request body.</p>
+
+<p>A sample request looks like this:</p>
+<pre class="prettyprint linenums">curl https://www.113.no/ords/api/v1/assets/
+</pre>
+
+
+<h3>Response Format</h3>
+
+<p>The API always returns a JSON object with the Content-Type set to <code>application/json</code>. If the request was successful, the requested object is returned. If the call fails, a JSON object is returned with details about the error.</p>
+
+<p>Unless otherwise noted, date values are represented using the <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format, as local time (without a time zone designator), for example <code>2014-01-20T12:57:00</code>. Booleans are represented with <code>Y</code> for true and <code>N</code> for false.</p>
+
+<p>Example Response:</p>
+
+<pre class="prettyprint linenums">[{
+  "API_MESSAGE": "Some message here."
+}]
+</pre>
+
+
+<p>In addition to return values specific to each service operation, the following return values are common to all successful calls:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Property</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>API_CURRENT_USER_ID</code></td>
+    <td>The identifier of the currently authenticated user.</td>
+  </tr>
+  <tr>
+    <td><code>API_MESSAGE</code></td>
+    <td>A text string containing more information about the result of the call.</td>
+  </tr>
+</tbody></table>
+
+<h4>Error Handling</h4>
+
+<p>The following return values are used when the call results in an error:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Property</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>API_ERROR</code></td>
+    <td>A text string containing more information about the error.</td>
+  </tr>
+</tbody></table>
+
+
+<hr style="margin-top:50px;">
+
+
+<h1 id="asset_search">Asset Search</h1>
+
+<h3 class="call">Search for assets</h3>
+
+<p>This call searches for assets (AEDs) matching the given search criteria.</p>
+
+<div class="alert alert-success"><span class="request label">GET</span> <span class="request label label-success">assets/search/</span></div>
+
+<p>The call has the following parameters:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>max_rows</code></td>
+    <td>A number that restricts the total number of returned rows.</td>
+    <td>No</td>
+    <td>5000</td>
+  </tr>
+  <tr>
+    <td><code>from_row</code></td>
+    <td>A number that specifies the starting row. Ignored if used in combination with <code>latitude</code>, <code>longitude</code> and <code>distance</code> parameters.</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>to_row</code></td>
+    <td>A number that specifies the ending row. Ignored if used in combination with <code>latitude</code>, <code>longitude</code> and <code>distance</code> parameters.</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><code>updated_since</code></td>
+    <td>A date that restricts the rows to those modified since the given date.</td>
+    <td>No</td>
+    <td></td>
+  </tr>  
+  <tr>
+    <td><code>latitude</code></td>
+    <td>A number that specifies the latitude of the point of origin for the search. Must be used in combination with <code>longitude</code> and <code>distance</code>.</td>
+    <td>No</td>
+    <td></td>
+  </tr>  
+  <tr>
+    <td><code>longitude</code></td>
+    <td>A number that specifies the longitude of the point of origin for the search. Must be used in combination with <code>latitude</code> and <code>distance</code>.</td>
+    <td>No</td>
+    <td></td>
+  </tr>  
+  <tr>
+    <td><code>distance</code></td>
+    <td>A number that specifies the distance (in meters) to search from the point of origin. Must be used in combination with <code>latitude</code> and <code>longitude</code>.</td>
+    <td>No</td>
+    <td></td>
+  </tr>  
+  <tr>
+    <td><code>date</code></td>
+    <td>A date that is used to evaluate the opening hours.</td>
+    <td>No</td>
+    <td></td>
+  </tr>  
+</tbody></table>
+
+<p>The call returns the following:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Property</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>ASSETS</code></td>
+    <td>A list of assets matching the search criteria.</td>
+  </tr>
+</tbody></table>
+
+<p>Example Request:</p>
+
+<pre class="prettyprint linenums">curl https://www.113.no/ords/api/v1/assets/search/?max_rows=2
+</pre>
+
+<p>Example Response:</p>
+
+<pre class="prettyprint linenums">{
+"API_MESSAGE":"Request successful."
+,"API_CURRENT_USER_ID":100
+,"ASSETS":[
+{
+"ASSET_ID":5196
+,"ASSET_GUID":"48F3A281F46C81E7E050020A0FCA913B"
+,"SITE_LATITUDE":58.8973289
+,"SITE_LONGITUDE":5.69732620000002
+,"SITE_NAME":"Bouvet Norge AS"
+,"SITE_ADDRESS":"Fabrikkveien 10"
+,"SITE_FLOOR_NUMBER":1
+,"SITE_POST_CODE":"4033"
+,"SITE_POST_AREA":"Stavanger"
+,"SITE_DESCRIPTION":"Forus, ca. 250m fra Tvedtsenteret"
+,"CREATED_DATE":"2017-02-20T19:12:35Z"
+,"MODIFIED_DATE":"2017-03-29T11:34:32Z"
+,"IS_OPEN":"Y"
+,"IS_OPEN_DATE":"2017-07-05T10:19:05Z"
+,"OPENING_HOURS_TEXT":"\u00C5pent"
+,"OPENING_HOURS_LIMITED":"N"
+,"OPENING_HOURS_MON_FROM":800
+,"OPENING_HOURS_MON_TO":1600
+,"OPENING_HOURS_TUE_FROM":800
+,"OPENING_HOURS_TUE_TO":1600
+,"OPENING_HOURS_WED_FROM":800
+,"OPENING_HOURS_WED_TO":1600
+,"OPENING_HOURS_THU_FROM":800
+,"OPENING_HOURS_THU_TO":1600
+,"OPENING_HOURS_FRI_FROM":800
+,"OPENING_HOURS_FRI_TO":1600
+,"OPENING_HOURS_CLOSED_HOLIDAYS":"N"
+,"ACTIVE_DATE_LIMITED":"N"
+}
+,{
+"ASSET_ID":300
+,"ASSET_GUID":"4A9DF0EDB6170B6FE050C7807D210654"
+,"SITE_LATITUDE":59.90759329999999
+,"SITE_LONGITUDE":10.752594799999997
+,"SITE_NAME":"test"
+,"SITE_ADDRESS":"Kirsten Flagstads Plass 1"
+,"SITE_FLOOR_NUMBER":1
+,"SITE_POST_CODE":"0150"
+,"SITE_POST_AREA":"OSLO"
+,"SITE_DESCRIPTION":"P\u00E5 den fine scenen."
+,"CREATED_DATE":"2017-03-13T14:46:41Z"
+,"MODIFIED_DATE":"2017-03-29T11:34:30Z"
+,"IS_OPEN":"Y"
+,"IS_OPEN_DATE":"2017-07-05T10:19:05Z"
+,"OPENING_HOURS_TEXT":"\u00C5pent"
+,"OPENING_HOURS_LIMITED":"N"
+,"OPENING_HOURS_MON_FROM":800
+,"OPENING_HOURS_MON_TO":1600
+,"OPENING_HOURS_TUE_FROM":800
+,"OPENING_HOURS_TUE_TO":1600
+,"OPENING_HOURS_WED_FROM":800
+,"OPENING_HOURS_WED_TO":1600
+,"OPENING_HOURS_THU_FROM":800
+,"OPENING_HOURS_THU_TO":1600
+,"OPENING_HOURS_FRI_FROM":800
+,"OPENING_HOURS_FRI_TO":1600
+,"OPENING_HOURS_CLOSED_HOLIDAYS":"N"
+,"ACTIVE_DATE_LIMITED":"N"
+}
+]
+}
+</pre>
+
+
+
+<h1 id="my_assets">My Assets</h1>
+
+<h3 class="call">Get my assets</h3>
+
+<p>This call retrieves the assets (AEDs) belonging to the current user.</p>
+
+<div class="alert alert-success"><span class="request label">GET</span> <span class="request label label-success">assets/</span></div>
+
+
+<p>The call returns the following:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Property</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>ASSETS</code></td>
+    <td>A list of assets belonging to the current user. Note that this list may contain restricted information, such as access codes, that is not included in the <code>assets/search/</code> method.</td>
+  </tr>
+</tbody></table>
+
+<p>Example Request:</p>
+
+<pre class="prettyprint linenums">curl https://www.113.no/ords/api/v1/assets/
+</pre>
+
+<p>Example Response:</p>
+
+<pre class="prettyprint linenums">{
+"API_MESSAGE":"Request successful."
+,"API_CURRENT_USER_ID":100
+,"ASSETS":[
+{
+"ASSET_ID":116
+,"ASSET_GUID":"437865F156B69927E050020A0FCAE37E"
+,"SERIAL_NUMBER":"fgff3444"
+,"ASSET_TYPE_ID":101
+,"ASSET_TYPE_NAME":"Powerheart AED G3 Semi-Automatic"
+,"PURCHASE_DATE":"2016-12-01T00:00:00Z"
+,"CHILD_MODE":"N"
+,"ACTIVE":"Y"
+,"ASSET_STATUS":"MISSING_INFO"
+,"ACTIVE_DATE_LIMITED":"N"
+,"OPENING_HOURS_CLOSED_HOLIDAYS":"Y"
+,"OPENING_HOURS_LIMITED":"N"
+,"SITE_LATITUDE":59.9148954
+,"SITE_LONGITUDE":10.71713920000002
+,"SITE_ADDRESS":"bygd\u00F8y alle 1"
+,"CREATED_DATE":"2017-02-20T19:12:14Z"
+,"MODIFIED_DATE":"2017-03-13T15:28:53Z"
+}
+,{
+"ASSET_ID":198
+,"ASSET_GUID":"48174CAC5E1855FBE050020A0FCA55F7"
+,"SERIAL_NUMBER":"456"
+,"ASSET_TYPE_ID":102
+,"ASSET_TYPE_NAME":"LIFEPAK 1000"
+,"PURCHASE_DATE":"2017-02-05T00:00:00Z"
+,"BATTERY_EXPIRY_DATE":"2017-03-18T00:00:00Z"
+,"ELECTRODE_EXPIRY_DATE":"2017-12-30T00:00:00Z"
+,"CHILD_MODE":"N"
+,"ACTIVE":"Y"
+,"ASSET_STATUS":"MISSING_INFO"
+,"ACTIVE_DATE_LIMITED":"N"
+,"OPENING_HOURS_CLOSED_HOLIDAYS":"N"
+,"OPENING_HOURS_LIMITED":"N"
+,"SITE_LATITUDE":58.897120128994914
+,"SITE_LONGITUDE":5.697931945323944
+,"SITE_NAME":"testa oppdatere fra API"
+,"SITE_ADDRESS":"adresse ny"
+,"SITE_POST_CODE":"4018"
+,"SITE_POST_AREA":"Stavanger"
+,"SITE_FLOOR_NUMBER":7
+,"SITE_DESCRIPTION":"beskrivelse av plassering (oppdatert)"
+,"SITE_ACCESS_INFO":"informasjon for n\u00F8detat her (oppdatert xxx)"
+,"CREATED_DATE":"2017-02-20T19:12:14Z"
+,"MODIFIED_DATE":"2017-03-13T15:28:54Z"
+}
+,{
+"ASSET_ID":329
+,"ASSET_GUID":"4AFD332E8246B47CE050C7807D215904"
+,"SERIAL_NUMBER":"43217"
+,"ASSET_TYPE_ID":102
+,"ASSET_TYPE_NAME":"LIFEPAK 1000"
+,"PURCHASE_DATE":"2015-08-10T00:00:00Z"
+,"BATTERY_EXPIRY_DATE":"2017-12-27T00:00:00Z"
+,"ELECTRODE_EXPIRY_DATE":"2017-12-30T00:00:00Z"
+,"BATTERY_OK":"Y"
+,"CHILD_MODE":"N"
+,"ACTIVE":"N"
+,"ASSET_STATUS":"CONFIRMED"
+,"ACTIVE_DATE_LIMITED":"N"
+,"OPENING_HOURS_CLOSED_HOLIDAYS":"N"
+,"OPENING_HOURS_LIMITED":"N"
+,"SITE_LATITUDE":64.22169970334694
+,"SITE_LONGITUDE":10.3290698643832
+,"SITE_NAME":"Audun test 37"
+,"SITE_ADDRESS":"Pilestredet 30"
+,"SITE_POST_CODE":"0130"
+,"SITE_POST_AREA":"Oslo"
+,"SITE_DESCRIPTION":"Bak skranken"
+,"SITE_ACCESS_INFO":"koden f\u00E5r du ikke"
+,"CREATED_DATE":"2017-03-18T09:02:50Z"
+,"MODIFIED_DATE":"2017-03-29T11:34:30Z"
+}
+]
+}
+</pre>
+
+
+
+<h3 class="call">Get one asset</h3>
+
+<p>This call retrieves information about a specific asset.</p>
+
+<div class="alert alert-success"><span class="request label">GET</span> <span class="request label label-success">assets/{GUID}</span></div>
+
+<p>The call has the following parameters:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>GUID</code></td>
+    <td>The unique identifier for a specific asset.</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+</tbody></table>
+
+
+<p>The call returns the following:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Property</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>ASSETS</code></td>
+    <td>A list of assets containig only one item, as specified by the <code>GUID</code> parameter.</td>
+  </tr>
+</tbody></table>
+
+<p>Example Request:</p>
+
+<pre class="prettyprint linenums">curl https://www.113.no/ords/api/v1/assets/437865F156B69927E050020A0FCAE37E
+</pre>
+
+<p>Example Response:</p>
+
+<pre class="prettyprint linenums">{
+"API_MESSAGE":"Request successful."
+,"API_CURRENT_USER_ID":100
+,"ASSETS":[
+{
+"ASSET_ID":116
+,"ASSET_GUID":"437865F156B69927E050020A0FCAE37E"
+,"SERIAL_NUMBER":"fgff3444"
+,"ASSET_TYPE_ID":101
+,"ASSET_TYPE_NAME":"Powerheart AED G3 Semi-Automatic"
+,"PURCHASE_DATE":"2016-12-01T00:00:00Z"
+,"CHILD_MODE":"N"
+,"ACTIVE":"Y"
+,"ASSET_STATUS":"MISSING_INFO"
+,"ACTIVE_DATE_LIMITED":"N"
+,"OPENING_HOURS_CLOSED_HOLIDAYS":"Y"
+,"OPENING_HOURS_LIMITED":"N"
+,"SITE_LATITUDE":59.9148954
+,"SITE_LONGITUDE":10.71713920000002
+,"SITE_ADDRESS":"bygd\u00F8y alle 1"
+,"CREATED_DATE":"2017-02-20T19:12:14Z"
+,"MODIFIED_DATE":"2017-03-13T15:28:53Z"
+}
+]
+}
+</pre>
+
+
+<h3 class="call">Activate asset</h3>
+
+<p>This call activates a specific asset.</p>
+
+<div class="alert alert-success"><span class="request label">PUT</span> <span class="request label label-success">assets/{GUID}/active</span></div>
+
+<p>The call has the following parameters:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>GUID</code></td>
+    <td>The unique identifier for a specific asset.</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+</tbody></table>
+
+<div class="alert alert-warning"><b>Note:</b> For PUT requests, the request body cannot be empty. Use a dummy request body value when using PUT:
+<pre>{ "dummy": 42 }
+</pre>
+</div>
+
+
+<p>Example Request:</p>
+
+<pre class="prettyprint linenums">curl -X PUT -H "Content-Type: application/json" -d '{"dummy":42}' https://www.113.no/ords/api/v1/assets/437865F156B69927E050020A0FCAE37E/active
+</pre>
+
+<p>Example Response:</p>
+
+<pre class="prettyprint linenums">{
+  "API_MESSAGE": "Asset updated successfully."
+}
+</pre>
+
+
+<h3 class="call">Deactivate asset</h3>
+
+<p>This call deactivates a specific asset.</p>
+
+<div class="alert alert-success"><span class="request label">PUT</span> <span class="request label label-success">assets/{GUID}/inactive</span></div>
+
+<p>The call has the following parameters:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>GUID</code></td>
+    <td>The unique identifier for a specific asset.</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+</tbody></table>
+
+<div class="alert alert-warning"><b>Note:</b> For PUT requests, the request body cannot be empty. Use a dummy request body value when using PUT:
+<pre>{ "dummy": 42 }
+</pre>
+</div>
+
+
+<p>Example Request:</p>
+
+<pre class="prettyprint linenums">curl -X PUT -H "Content-Type: application/json" -d '{"dummy":42}' https://www.113.no/ords/api/v1/assets/437865F156B69927E050020A0FCAE37E/inactive
+</pre>
+
+<p>Example Response:</p>
+
+<pre class="prettyprint linenums">{
+  "API_MESSAGE": "Asset updated successfully."
+}
+</pre>
+
+
+<h3 class="call">Delete asset</h3>
+
+<p>This call deletes a specific asset.</p>
+
+<div class="alert alert-success"><span class="request label">DELETE</span> <span class="request label label-success">assets/{GUID}</span></div>
+
+<p>The call has the following parameters:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>GUID</code></td>
+    <td>The unique identifier for a specific asset.</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+</tbody></table>
+
+<div class="alert alert-warning"><b>Note:</b> For DELETE requests, the request body cannot be empty. Use a dummy request body value when using DELETE:
+<pre>{ "dummy": 42 }
+</pre>
+</div>
+
+
+<p>Example Request:</p>
+
+<pre class="prettyprint linenums">curl -X DELETE -H "Content-Type: application/json" -d '{"dummy":42}' https://www.113.no/ords/api/v1/assets/437865F156B69927E050020A0FCAE37E
+</pre>
+
+<p>Example Response:</p>
+
+<pre class="prettyprint linenums">{
+"API_MESSAGE":"Asset deleted."
+,"ASSET":{
+"ASSET_ID":116
+,"ASSET_GUID":"437865F156B69927E050020A0FCAE37E"
+}
+}
+</pre>
+
+
+<h3 class="call">Create asset</h3>
+
+<p>This call creates a new asset.</p>
+
+<div class="alert alert-success"><span class="request label">POST</span> <span class="request label label-success">assets/</span></div>
+
+<p>The call has the following parameters:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Parameter</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><code>GUID</code></td>
+    <td>The unique identifier for a specific asset.</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+</tbody></table>
+
+<p>An asset is defined by the following attributes:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Attribute</th>
+    <th>Description</th>
+    <th>Data Type</th>
+    <th>Remarks</th>
+  </tr>
+<tr><td>asset_guid</td><td>Unique identifier</td><td>string</td><td>Is automatically assigned when new asset is created.</td></tr>
+<tr><td>serial_number</td><td>Serial number</td><td>string(255)</td><td></td></tr>
+<tr><td>site_name</td><td>Name of the asset's position</td><td>string(255)</td><td></td></tr>
+<tr><td>site_latitude</td><td>Latitude</td><td>number</td><td></td></tr>
+<tr><td>site_longitude</td><td>Longitude</td><td>number</td><td></td></tr>
+<tr><td>site_address</td><td>Address</td><td>string(255)</td><td></td></tr>
+<tr><td>site_floor_number</td><td>Floor number</td><td>number</td><td></td></tr>
+<tr><td>site_post_code</td><td>Postal code</td><td>string(255)</td><td></td></tr>
+<tr><td>site_post_area</td><td>Postal area</td><td>string(255)</td><td></td></tr>
+<tr><td>site_description</td><td>Description of asset location</td><td>string(4000)</td><td></td></tr>
+<tr><td>site_access_info</td><td>Restricted info such as access codes</td><td>string(255)</td><td>This information will not be shown in public search</td></tr>
+<tr><td>asset_type_name</td><td>Asset type name (product name)</td><td>string(255)</td><td></td></tr>
+<tr><td>manufacturer_name</td><td>Manufacturer name</td><td>string(255)</td><td></td></tr>
+<tr><td>purchase_date</td><td>Purchase date</td><td>date</td><td></td></tr>
+<tr><td>battery_expiry_date</td><td>Battery expiry date</td><td>date</td><td></td></tr>
+<tr><td>electrode_expiry_date</td><td>Electrode expiry date</td><td>date</td><td></td></tr>
+<tr><td>child_mode</td><td>Does the asset have a child mode? (Y/N)</td><td>boolean</td><td></td></tr>
+<tr><td>child_electrode_expiry_date</td><td>Child electrode expiry date</td><td>date</td><td></td></tr>
+<tr><td>battery_ok</td><td>Is the battery OK? (Y/N)</td><td>boolean</td><td></td></tr>
+<tr><td>active_date_limited</td><td>Is the active date limited? (Y/N)</td><td>boolean</td><td></td></tr>
+<tr><td>active_from_date</td><td>Active from date</td><td>date</td><td></td></tr>
+<tr><td>active_to_date</td><td>Active to date</td><td>date</td><td></td></tr>
+<tr><td>opening_hours_closed_holidays</td><td>Is the location closed during public holidays? (Y/N)</td><td>boolean</td><td></td></tr>
+<tr><td>opening_hours_limited</td><td>Are opening hours limited? (Y/N)</td><td>boolean</td><td></td></tr>
+<tr><td>opening_hours_mon_from</td><td>Opening hours: Mondays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_mon_to</td><td>Opening hours: Mondays to</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_tue_from</td><td>Opening hours: Tuesdays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_tue_to</td><td>Opening hours: Tuesdays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_wed_from</td><td>Opening hours: Wednesdays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_wed_to</td><td>Opening hours: Wednesdays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_thu_from</td><td>Opening hours: Thursdays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_thu_to</td><td>Opening hours: Thursdays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_fri_from</td><td>Opening hours: Fridays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_fri_to</td><td>Opening hours: Fridays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_sat_from</td><td>Opening hours: Saturdays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_sat_to</td><td>Opening hours: Saturdays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_sun_from</td><td>Opening hours: Sundays from</td><td>number</td><td></td></tr>
+<tr><td>opening_hours_sun_to</td><td>Opening hours: Sundays from</td><td>number</td><td></td></tr>
+</tbody></table>
+
+<p>Example Request:</p>
+
+<pre class="prettyprint linenums">curl -X POST -H "Content-Type: application/json" -d '{ "serial_number": "123", "site_name": "tester fra API", "site_latitude": 58.897120128994914, "site_longitude": 5.697931945323944 }' https://www.113.no/ords/api/v1/assets/
+</pre>
+
+<p>Example Response:</p>
+
+<pre class="prettyprint linenums">{
+"API_MESSAGE":"New asset created."
+,"ASSET":{
+"ASSET_ID":116
+,"ASSET_GUID":"437865F156B69927E050020A0FCAE37E"
+,"OWNER_USER_ID":100
+}
+}
+</pre>
+
+
+<h3 class="call">Update asset</h3>
+
+<p>This call updates an existing asset.</p>
+
+<div class="alert alert-success"><span class="request label">PUT</span> <span class="request label label-success">assets/{GUID}</span></div>
+
+<p>The call has the following parameters:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Parameter
+    </th><th>Description
+    </th><th>Required
+    </th><th>Default
+  </th></tr>
+  <tr>
+    <td><code>GUID</code></td>
+    <td>The unique identifier for a specific asset.</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+</tbody></table>
+
+<div class="alert alert-warning"><b>Note:</b> See the list of attributes in the "Create asset" call above for valid attributes.</div>
+
+
+<p>Example Request:</p>
+
+<pre class="prettyprint linenums">curl -X PUT -H "Content-Type: application/json" -d '{ "serial_number": "123", "site_name": "oppdatert fra API", "site_latitude": 58.897120128994914, "site_longitude": 5.697931945323944 }' https://www.113.no/ords/api/v1/assets/437865F156B69927E050020A0FCAE37E
+</pre>
+
+<p>Example Response:</p>
+
+<pre class="prettyprint linenums">{
+"API_MESSAGE":"Asset updated successfully."
+,"ASSET":{
+"ASSET_ID":116
+,"ASSET_GUID":"437865F156B69927E050020A0FCAE37E"
+}
+}
+</pre>
+
+
+<h1 id="asset_messages">Messages</h1>
+
+
+<h3 class="call">Create message</h3>
+
+<p>This call sends a message to the asset owner.</p>
+
+<div class="alert alert-success"><span class="request label">POST</span> <span class="request label label-success">assets/{GUID}/message</span></div>
+
+<p>The call has the following parameters:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Parameter
+    </th><th>Description
+    </th><th>Required
+    </th><th>Default
+  </th></tr>
+  <tr>
+    <td><code>GUID</code></td>
+    <td>The unique identifier for a specific asset.</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+</tbody></table>
+
+<p>A message is defined by the following attributes:</p>
+
+<table class="table table-striped table-bordered">
+  <tbody><tr>
+    <th>Attribute</th>
+    <th>Description</th>
+    <th>Data Type</th>
+    <th>Remarks</th>
+  </tr>
+  <tr>
+    <td>message_title</td>
+    <td>The message title</td>
+    <td>string</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>message_body</td>
+    <td>The message body</td>
+    <td>string</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>send_via</td>
+    <td>The transmission type</td>
+    <td>string</td>
+    <td>Valid values are <code>EMAIL</code> and <code>SMS</code>. If no value is specified, it defaults to <code>EMAIL</code>.</td>
+  </tr>
+ </tbody></table>
+
+<p>Example Request:</p>
+
+<pre class="prettyprint linenums">curl -X POST -H "Content-Type: application/json" -d '{ "message_title": "Hello from Hjertestarterregister", "message_body": "some text here" }' https://www.113.no/ords/api/v1/assets/437865F156B69927E050020A0FCAE37E/message
+</pre>
+
+<p>Example Response:</p>
+
+<pre class="prettyprint linenums">{
+"API_MESSAGE":"Message added to message queue created."
+,"ASSET":{
+"ASSET_ID":116
+,"ASSET_GUID":"437865F156B69927E050020A0FCAE37E"
+}
+}
+</pre>
+
+
+</div> <!-- col -->
+</div> <!-- row -->
+
+
+<br>
+<br>
+<br>
+
+
+      </div> <!-- container -->
+
+    </div> <!-- wrap -->
+
+    <div id="support-footer">
+      <div class="container">
+        <p class="text-muted">Developed by <a href="http://www.bouvet.no/">Bouvet</a></p>
+      </div>
+    </div> <!-- support-footer -->
+
+
+    <script src="file:///Users/karlgustav/Library/Group%20Containers/2E337YPCZY.airmail/Library/Application%20Support/it.bloop.airmail2/Airmail/General/Tmp/js/jquery-1.10.2.min.js"></script>
+    <script src="file:///Users/karlgustav/Library/Group%20Containers/2E337YPCZY.airmail/Library/Application%20Support/it.bloop.airmail2/Airmail/General/Tmp/js/bootstrap.min.js"></script>
+    <script src="./Hjertestarterregister - API Reference_files/run_prettify.js"></script>
+
+  
+
+</body></html>
