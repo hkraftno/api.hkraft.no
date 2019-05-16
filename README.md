@@ -36,6 +36,8 @@ Google Dataset Search: https://toolbox.google.com/datasetsearch
 - Boligmappa: https://boligmappa.atlassian.net/wiki/spaces/API/pages/26312714/Introduction
 - Ladepunkter for bil: https://openchargemap.org/site/
 - Ladepunkter for bil (API-dokumentasjon): https://openchargemap.org/site/develop/api
+- Ladepunkter for bil: https://nobil.no
+- Ladepunkter for bil (API-dokumentasjon): https://info.nobil.no/api/66-api-informasjon
 
 ## Developer APIs
 
