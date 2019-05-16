@@ -34,6 +34,8 @@ Google Dataset Search: https://toolbox.google.com/datasetsearch
 - BMW Labs IFTTT: https://ifttt.com/bmwlabs
 - Tesla unofficial APIs: https://www.teslaapi.io/ and https://tesla-api.timdorr.com/
 - Boligmappa: https://boligmappa.atlassian.net/wiki/spaces/API/pages/26312714/Introduction
+- Ladepunkter for bil: https://openchargemap.org/site/
+- Ladepunkter for bil (API-dokumentasjon): https://openchargemap.org/site/develop/api
 
 ## Developer APIs
 
