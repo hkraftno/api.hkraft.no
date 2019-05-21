@@ -22,6 +22,8 @@ Google Dataset Search: https://toolbox.google.com/datasetsearch
 - Universitetet i Oslo: https://api.uio.no/#!/
 - Electricity Map real-time visualisation of the CO2 emissions of electricity consumption: https://github.com/tmrowco/electricitymap-contrib#data-sources
 - Hjertestartere: https://www.113.no
+- Skyscanner: https://skyscanner.github.io/slate/
+- Thousands of APIs in the world's largest API Hub: https://rapidapi.com/
 
 ## 3rd party commercial Open APIs
 
