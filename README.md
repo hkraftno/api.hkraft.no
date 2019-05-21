@@ -23,7 +23,8 @@
 - Universitetet i Oslo: https://api.uio.no/#!/
 - Electricity Map real-time visualisation of the CO2 emissions of electricity consumption: https://github.com/tmrowco/electricitymap-contrib#data-sources
 - Hjertestartere: https://www.113.no
-- Skyscanner: https://skyscanner.github.io/slate/
+- Skyscanner (real time flytrafikk): https://skyscanner.github.io/slate/
+- Marine Traffic (store båter): https://www.marinetraffic.com/en/ais-api-services
 
 ## 3rd party commercial Open APIs
 
