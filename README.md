@@ -1,6 +1,6 @@
 # api.hkraft.no
 
-Directory of APIs
+## Directories of APIs
 
 - Google Dataset Search: https://toolbox.google.com/datasetsearch
 - Thousands of APIs in the world's largest API Hub: https://rapidapi.com/
