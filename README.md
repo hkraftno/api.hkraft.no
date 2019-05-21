@@ -2,17 +2,18 @@
 
 Directory of APIs
 
-Google Dataset Search: https://toolbox.google.com/datasetsearch
+- Google Dataset Search: https://toolbox.google.com/datasetsearch
+- Thousands of APIs in the world's largest API Hub: https://rapidapi.com/
+- Åpne offentlige data i Norge: https://data.norge.no
+- UrbaLurba Portal for norske smartbydata: https://urbalurba.no/
 
 ## Public data APIs
 
 - Norges vassdrags- og energidirektorat (NVE): http://api.nve.no/doc/
 - Meteorologisk Institutt: https://api.met.no/
 - GeoNorge: https://kartkatalog.geonorge.no/search
-- UrbaLurba Portal for norske smartbydata: https://urbalurba.no/
 - Statens Vegvesen: https://www.vegvesen.no/om+statens+vegvesen/om+organisasjonen/apne-data
 - Entur: https://www.entur.org/dev/api/
-- Åpne offentlige data i Norge: https://data.norge.no
 - Kartverket: https://www.kartverket.no/data/
 - Statistisk Sentralbyrå: https://www.ssb.no/omssb/tjenester-og-verktoy/api
 - Brønnøysundregistrene: https://www.brreg.no/produkter-og-tjenester/apne-data/
@@ -23,7 +24,6 @@ Google Dataset Search: https://toolbox.google.com/datasetsearch
 - Electricity Map real-time visualisation of the CO2 emissions of electricity consumption: https://github.com/tmrowco/electricitymap-contrib#data-sources
 - Hjertestartere: https://www.113.no
 - Skyscanner: https://skyscanner.github.io/slate/
-- Thousands of APIs in the world's largest API Hub: https://rapidapi.com/
 
 ## 3rd party commercial Open APIs
 
