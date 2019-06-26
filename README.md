@@ -47,7 +47,7 @@
 - DevDocs: https://devdocs.io/
 
 ## Documents and Signing
-
+- Postens signeringsportal: https://signering.posten.no/#/ (@phareim har bruker)
 - Digipost signing: https://github.com/digipost/signature-api-specification
 
 ## License
