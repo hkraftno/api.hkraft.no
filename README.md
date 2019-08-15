@@ -25,6 +25,7 @@
 - Hjertestartere: https://www.113.no
 - Skyscanner (real time flytrafikk): https://skyscanner.github.io/slate/
 - Marine Traffic (store båter): https://www.marinetraffic.com/en/ais-api-services
+- Climate Services for Clean Energy: https://s2s4e-dst.bsc.es/
 
 ## 3rd party commercial Open APIs
 
