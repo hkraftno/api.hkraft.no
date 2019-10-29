@@ -9,7 +9,7 @@
 
 ## Public data APIs
 
-- Norges vassdrags- og energidirektorat (NVE): http://api.nve.no/doc/
+- xGeo: http://www.senorge.no/aboutXgeo.html- Norges vassdrags- og energidirektorat (NVE): http://api.nve.no/doc/
 - Meteorologisk Institutt: https://api.met.no/
 - GeoNorge: https://kartkatalog.geonorge.no/search
 - Statens Vegvesen: https://www.vegvesen.no/om+statens+vegvesen/om+organisasjonen/apne-data
